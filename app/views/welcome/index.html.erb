@@ -1,0 +1,16 @@
+<% @title = "Boken" %>
+
+<div id="header">
+  <h1>Boken</h1>
+  <p class="cart"><%= image_tag "cart.png" %> Items in cart: <%= session[:product_id].nil? ? 0 : (session[:product_id]).count %>
+   Total: $0.00 - <%= link_to "Checkout", checkout_path %></p>
+  <%= link_to "Login", boken_path %> / <%= link_to "Sign Up", sign_up_path %> / 
+  <%= link_to "Admin", admin_root_path %>
+  <%= session[:product_id] %>
+
+  <%= render "products/search" %>
+
+  <%#= render "shared/nav" %>
+</div>
+
+  <%#= render "products/content" %>

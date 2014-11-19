@@ -1,0 +1,17 @@
+@title = "Boken"
+
+div id="header"
+  h1 Boken
+  p class="cart = image_tag "cart.png" Items in cart: = (session[:product_id]).count
+   Total: $0.00 - = link_to "Checkout", checkout_path
+  = link_to "Login", boken_path / = link_to "Sign Up", sign_up_path / 
+  = link_to "Admin", admin_root_path
+  = session[:product_id].each do |product|
+  p Session: = product
+  = end
+
+  render "products/search"
+
+  <%#= render "shared/nav" %>
+
+  <%#= render "products/content" %>

@@ -1,0 +1,12 @@
+<div id="content">
+<% @products.limit(10).order("rating DESC").each do |product| %>
+	<%= image_tag product.image %>
+	<p class="description"><%= truncate_text(product) %>
+	$<%= round(product.price) %> - <%= product.rating %>/5</p>
+  <!-- <input name="adv1" type="radio" class="star {split:4}"/>
+  <input name="adv1" type="radio" class="star {split:4}"/>
+  <input name="adv1" type="radio" class="star {split:4}"/>
+  <input name="adv1" type="radio" class="star {split:4}"/>
+  <input name="adv1" type="radio" class="star {split:4}"/> -->
+<% end %>
+</div>
