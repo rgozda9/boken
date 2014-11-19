@@ -2,7 +2,6 @@ div id="filterrific_results"
   div
     = page_entries_info products
   
-  = paginate @products
   table
   	tr
   	  th Name
@@ -10,21 +9,24 @@ div id="filterrific_results"
   	  th Description
   	  th Price
       th Rating
-      = if Product.status == true
+      - if Product.status == true
       th Sale
-      = end
-  	
-  	= @products.each do |product|
-  	  tr
-  	  	td = link_to(product.name, product_path(product))
-  	  	tdclass="image" = image_tag product.image
-  	  	td = truncate_text(product) %>
-  	  	td $ = round(product.price) %>
+    
+    - @products.each do |product|
+      tr
+        td = link_to(product.name, product_path(product))
+        td class="image" 
+          = image_tag product.image
+        td
+          = truncate_text(product)
+        td
+          | $
+          = round(product.price)
         td = product.rating
-        = if :with_on_sale == true
-        td $ = round(product.sale_price)
-        = end
-  	  
-  	= end
-  div data-score={"3"}
+        - if :with_on_sale == true
+          td 
+            | $
+            = round(product.sale_price)
+      
+  /div data-score={"3"}
 = paginate @products

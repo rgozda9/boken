@@ -1,0 +1,14 @@
+<% @title = "Boken" %>
+
+<div id="header">
+  <h1>Boken</h1>
+  <p class="cart"><%= image_tag "cart.png" %> Items in cart: <%= shopping_cart_items %>
+   Total: $<%= shopping_cart_total %> - <%= link_to "Checkout", checkout_path %></p>
+  <%= link_to "Login", login_path %> / <%= link_to "Sign Up", sign_up_path %> / <%= link_to "Admin", admin_root_path %>
+
+  <%#= debug session[:customer_id] %>
+
+  <%= render "products/search" %>
+
+  <%#= render "shared/nav" %>
+</div>

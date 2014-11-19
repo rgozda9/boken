@@ -10,7 +10,7 @@
   <%= password_field_tag :password %>
 </p>
 <p>
-  <% customer = Customer.find(:id).where("username = ?", :username).where("password = ?", :password) %>
-  <%= submit_tag "Login", add_to_session_customer_path(customer) %>
+  <%= submit_tag "Login" %>
+  <% redirect %>
 </p>
 <% end %>

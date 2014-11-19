@@ -17,7 +17,9 @@ Rails.application.routes.draw do
 
   get 'login', to: 'customers#login', as: 'login'
 
-  get 'contact', to: 'admin/contact#edit', as: 'edit_contact' 
+  get 'contact', to: 'admin/contact#edit', as: 'edit_contact'
+
+  post 'login', to: 'customers#login'
 
   resources :line_items
 

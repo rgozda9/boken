@@ -18,11 +18,17 @@ class CustomersController < ApplicationController
     @provinces = Province.all
   end
 
-  def add_to_session
-    session[:customer_id] = @customer.id
-    flash[:notice] = "You have successfully signed up."
-    redirect_to boken_path
+  def redirect
+    if !params[:username].nil? && !params[:password].nil?
+      redirect_to boken_path
+    end
   end
+  helper_method :redirect
+  # def add_to_session
+  #   session[:customer_id] = @customer.id
+  #   flash[:notice] = "You have successfully signed up."
+  #   redirect_to boken_path
+  # end
 
   # GET /customers/1/edit
   def edit
