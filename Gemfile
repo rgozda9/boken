@@ -43,6 +43,6 @@ gem 'devise'
 gem 'kaminari'
 
 gem 'filterrific'
-gem 'slim', '~> 2.1.0'
+gem 'slim-rails', '~> 2.1.0'
 gem 'jquery-raty-rails', github: 'bmc/jquery-raty-rails'
 gem 'acts_as_shopping_cart', '~> 0.2.1'

@@ -19,8 +19,7 @@ class CustomersController < ApplicationController
   end
 
   def add_to_session
-    session[:customer_id] ||= []
-    session[:customer_id] << Customer.find(params[:id])
+    session[:customer_id] = @customer.id
     flash[:notice] = "You have successfully signed up."
     redirect_to boken_path
   end
@@ -78,6 +77,6 @@ class CustomersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def customer_params
-      params.require(:customer).permit(:first_name, :last_name, :address, :city, :country, :postal_code, :email, :province_id, :username, :password)
+      params.require(:customer).permit(:first_name, :last_name, :address, :city, :country_name, :postal_code, :email, :province_id, :username, :password)
     end
 end

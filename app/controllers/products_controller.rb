@@ -6,7 +6,6 @@ class ProductsController < ApplicationController
   def index
     @products = Product.all
     @products = Product.order(:name).per_page_kaminari params[:page]
-    
   end
 
   # GET /products/1
@@ -16,7 +15,7 @@ class ProductsController < ApplicationController
 
   def add_to_session
     session[:product_id] ||= []
-    session[:product_id] << Product.find(params[:id])
+    session[:product_id] << Product.find(params[:id]).id
     flash[:notice] = "You have successfully added this item to your cart."
     redirect_to product_path(id: params[:id])
   end

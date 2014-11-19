@@ -1,5 +1,6 @@
 class WelcomeController < ApplicationController
   def index
+    #session[:product_id] = nil
   	@filterrific = Filterrific.new( 
       Product, 
       params[:filterrific] || session[:filterrific_products] 
@@ -18,8 +19,33 @@ class WelcomeController < ApplicationController
     redirect_to :action => :index 
   end
 
-  def sign_up
-    @provinces = Province.all
-    @customer = Customer.new
+  def shopping_cart_items
+    count = 0
+    if session[:product_id].nil?
+      count = 0
+    else
+      count = session[:product_id].count
+    end
+    count
   end
+  helper_method :shopping_cart_items
+
+  def shopping_cart_total
+    total = 0
+    if session[:product_id].nil?
+      total = 0.00
+    else
+      session[:product_id].each do |product|
+        p = Product.find(product)
+        total = total + p.price
+      end
+    end
+    total
+  end
+  helper_method :shopping_cart_total
+
+  # def sign_up
+  #   @provinces = Province.all
+  #   @customer = Customer.new
+  # end
 end
