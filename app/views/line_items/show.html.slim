@@ -1,0 +1,21 @@
+p id="notice" = notice
+
+p
+  strong Quantity:
+  = @line_item.quantity
+
+p
+  strong Price:
+  = @line_item.price
+
+p
+  strong Product:
+  = @line_item.product_id
+
+p
+  strong Order:
+  = @line_item.order_id
+
+= link_to 'Edit', edit_line_item_path(@line_item)
+|  | 
+= link_to 'Back', line_items_path
