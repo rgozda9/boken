@@ -1,0 +1,50 @@
+- @title = "Customers"
+
+table
+  thead
+    tr
+      th First name
+      th Last name
+      th Address
+      th City
+      th Country
+      th Postal code
+      th Email
+      th Province
+      th Username
+      th Password
+      th colspan="3"
+
+  tbody
+    - @customers.each do |customer| 
+      tr
+        td
+          = customer.first_name
+        td
+          = customer.last_name
+        td
+          = customer.address
+        td
+          = customer.city
+        td
+          = customer.country_name
+        td
+          = customer.postal_code
+        td
+          = customer.email
+        td
+          = customer.province_id
+        td
+          = customer.username
+        td
+          = customer.password
+        td
+          = (link_to 'Show', customer)
+        td
+          = (link_to 'Edit', edit_customer_path(customer))
+        td
+          = (link_to 'Destroy', customer, method: :delete, data: { confirm: 'Are you sure?' })
+
+br
+
+= (link_to 'New Customer', new_customer_path)
