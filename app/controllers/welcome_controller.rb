@@ -2,6 +2,7 @@ class WelcomeController < ApplicationController
   def index
     #session[:product_id] = nil
     #session[:customer_id] = nil
+    #session[:redirect] = nil
   	@filterrific = Filterrific.new( 
       Product, 
       params[:filterrific] || session[:filterrific_products] 
@@ -45,12 +46,12 @@ class WelcomeController < ApplicationController
   end
   helper_method :shopping_cart_total
 
-  def add_to_session
-    customer = Customer.find(params[:id]).where("username = ?", params[:username]).where("password = ?", params[:password])
-    session[:customer_id] = customer
-    flash[:notice] = "You have successfully signed up."
-    redirect_to boken_path
-  end
+  # def add_to_session
+  #   customer = Customer.find(params[:id]).where("username = ?", params[:username]).where("password = ?", params[:password])
+  #   session[:customer_id] = customer
+  #   flash[:notice] = "You have successfully signed up."
+  #   redirect_to boken_path
+  # end
 
   # def sign_up
   #   @provinces = Province.all

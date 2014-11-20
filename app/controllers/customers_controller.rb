@@ -5,6 +5,7 @@ class CustomersController < ApplicationController
   # GET /customers.json
   def index
     @customers = Customer.all
+    session[:redirect] = false
   end
 
   # GET /customers/1
@@ -18,10 +19,18 @@ class CustomersController < ApplicationController
     @provinces = Province.all
   end
 
-  def redirect
+  def add_to_session
     if !params[:username].nil? && !params[:password].nil?
+      customer = Customer.select('id').where("username = ?", params[:username]).where("password = ?", params[:password])
+      session[:customer_id] = customer
+      flash[:notice] = "You have successfully logged in."
       redirect_to boken_path
     end
+  end
+  helper_method :add_to_session
+
+  def redirect
+    redirect_to checkout_path
   end
   helper_method :redirect
   # def add_to_session
@@ -39,10 +48,11 @@ class CustomersController < ApplicationController
   # POST /customers.json
   def create
     @customer = Customer.new(customer_params)
+    @provinces = Province.all
 
     respond_to do |format|
       if @customer.save
-        format.html { redirect_to @customer, notice: 'Customer was successfully created.' }
+        format.html { redirect_to login_path, notice: 'You have successfully signed up. Please log in.' }
         format.json { render :show, status: :created, location: @customer }
       else
         format.html { render :new }

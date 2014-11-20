@@ -6,6 +6,9 @@ html
 		= javascript_include_tag 'application', 'data-turbolinks-track' => true
 		= csrf_meta_tag
 
-	body data-no-turbolink
+	body 
 		= yield
-		div id="footer" Copywrong = Time.now.year - No Rights Reserved
+		div id="footer"
+		  |  Copywrong 
+		  = Time.now.year
+		  |  - No Rights Reserved

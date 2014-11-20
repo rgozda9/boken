@@ -1,20 +1,25 @@
 <% @title = "Checkout" %>
 
-<%= form_tag("", method: "post") do %>
-  <% if params[:id] != nil %>
-  <div>
-    <%= label_tag(:name, @product.name) %>
-  </div>
-  <div>
-    <%= label_tag(:quantity, "Quantity:") %>
-    <%= text_field_tag(:quantity, 1, minvalue: 1) %>
-  </div>
-  <div>
-    <%= label_tag(:price, "Price:") %>
-    <%= text_field_tag(:price, @product.price, :disabled => true) %>
-  </div>
-  <div>
-    <%= submit_tag "Submit" %>
-  </div>
+<% if session[:customer_id].nil? %>
+  <% session[:redirect] = true %>
+  <% redirect %>
+<% else %>
+  <%= form_tag("", method: "post") do %>
+    <% if params[:id] != nil %>
+    <div>
+      <%= label_tag(:name, @product.name) %>
+    </div>
+    <div>
+      <%= label_tag(:quantity, "Quantity:") %>
+      <%= text_field_tag(:quantity, 1, minvalue: 1) %>
+    </div>
+    <div>
+      <%= label_tag(:price, "Price:") %>
+      <%= text_field_tag(:price, @product.price, :disabled => true) %>
+    </div>
+    <div>
+      <%= submit_tag "Submit" %>
+    </div>
+    <% end %>
   <% end %>
 <% end %>

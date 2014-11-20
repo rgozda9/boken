@@ -1,16 +1,26 @@
 <% @title = "Login" %>
+<p id="notice"><%= notice %></p>
+
+<%# if session[:redirect] == true %>
+  <!-- <p>You must login to proceed to checkout.</p> -->
+<%# end %>
 
 <%= form_tag("", method: "post") do %>
-<p>
+<div class="field">
   <%= label_tag "username", "Username:" %>
-  <%= text_field_tag :username %>
-</p>
-<p>
+  <%= text_field_tag :username, "", :autofocus => true %>
+</div>
+<div class="field">
   <%= label_tag "password", "Password:" %>
   <%= password_field_tag :password %>
-</p>
-<p>
+</div>
+<div class="actions">
   <%= submit_tag "Login" %>
-  <% redirect %>
-</p>
+  <%# if session[:redirect].nil? %>
+  	<% add_to_session %>
+  <%# else %>
+  	<%# add_to_session %>
+  	<%# redirect %>
+  <%# end %>
+</div>
 <% end %>

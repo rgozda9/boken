@@ -20,6 +20,11 @@ class ProductsController < ApplicationController
     redirect_to product_path(id: params[:id])
   end
 
+  def redirect
+    redirect_to login_path
+  end
+  helper_method :redirect
+
   # GET /products/new
   def new
     @product = Product.new
