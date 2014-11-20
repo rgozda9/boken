@@ -1,0 +1,25 @@
+- @title = "Provinces"
+
+table
+  thead
+    tr
+      th Name
+      th Pst
+      th Gst
+      th Hst
+      th colspan="3"
+
+  tbody
+    - @provinces.each do |province| 
+      tr
+        td = province.name
+        td = rounding(province.pst)
+        td = rounding(province.gst)
+        td = rounding(province.hst)
+        td = link_to 'Show', province
+        td = link_to 'Edit', edit_province_path(province)
+        td = link_to 'Destroy', province, method: :delete, data: { confirm: 'Are you sure?' }
+
+br
+
+= link_to 'New Province', new_province_path
