@@ -1,0 +1,21 @@
+p id="notice" = notice
+
+p
+  strong Name:
+  = @province.name
+
+p
+  strong Pst:
+  = @province.pst
+
+p
+  strong Gst:
+  = @province.gst
+
+p
+  strong Hst:
+  = @province.hst
+
+= link_to 'Edit', edit_province_path(@province)
+|  | 
+= link_to 'Back', provinces_path
