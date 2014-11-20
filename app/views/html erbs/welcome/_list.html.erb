@@ -1,0 +1,31 @@
+<div id="filterrific_results">
+  <div>
+    <%= page_entries_info products %>
+  </div>
+  <table>
+  	<tr>
+  	  <th>Name</th>
+  	  <th>Image</th>
+  	  <th>Description</th>
+  	  <th>Price</th>
+      <th>Rating</th>
+      <% if Product.status == true %>
+      <th>Sale</th>
+      <% end %>
+  	</tr>
+  	<% @products.each do |product| %>
+  	  <tr>
+  	  	<td><%= link_to(product.name, product_path(product)) %></td>
+  	  	<td class="image"><%= image_tag product.image %></td>
+  	  	<td><%= truncate_text(product) %></td>
+  	  	<td>$<%= round(product.price) %></td>
+        <td><%= product.rating %></td>
+        <% if :with_on_sale == true %>
+        <td>$<%= round(product.sale_price) %></td>
+        <% end %>
+  	  </tr>
+  	<% end %>
+  </table>
+  <div data-score={"3"}></div>
+</div>
+<%= paginate @products %>
