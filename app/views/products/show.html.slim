@@ -1,0 +1,52 @@
+- @title = @product.name
+p id="notice" = notice
+
+p
+  strong Name: 
+  = @product.name
+
+p
+  strong Image: 
+  = image_tag @product.image
+
+p
+  strong Description: 
+  = @product.description
+
+p
+  strong Price: 
+  = round(@product.price)
+
+p
+  strong Stock quantity: 
+  = @product.stock_quantity
+
+p
+  strong On sale: 
+  = @product.on_sale
+
+p
+  strong Sale price: 
+  = round(@product.sale_price) unless @product.sale_price.nil?
+
+p
+  strong Status: 
+  = @product.status
+
+p
+  strong Rating: 
+  = @product.rating
+
+p
+  strong Category: 
+  = @product.category.name
+
+p
+  strong Genre: 
+  = @product.genre
+
+= link_to 'Buy', single_checkout_path
+|  |  
+= link_to "Add to cart", add_to_session_product_path(@product.id)
+br
+= link_to 'Back', boken_path
