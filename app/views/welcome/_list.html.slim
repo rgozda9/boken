@@ -30,3 +30,13 @@ div id="filterrific_results"
       
   /div data-score={"3"}
 = paginate @products
+
+/ div id="content"
+/ - @products.each do |product| 
+/   = image_tag product.image
+/   p class="description" = truncate_text(product)
+/     | $
+/     = round(product.price)
+/     |  - 
+/     = product.rating
+/     | /5

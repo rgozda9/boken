@@ -2,7 +2,7 @@
   - if @customer.errors.any? 
     div id="error_explanation"
       h2 = pluralize(@customer.errors.count, "error") 
-        |  prohibited this customer from being saved:
+        | prohibited this customer from being saved:
 
       ul
       - @customer.errors.full_messages.each do |message| 
