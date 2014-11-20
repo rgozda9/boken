@@ -79,10 +79,10 @@ class ProductsController < ApplicationController
   end
 
   def checkout
-    if params[:id] != nil
-      @product = Product.find(params[:id])
-    else
-      @products = Product.all
+    if session[:product_id] != nil
+      session[:product_id].each do |product|
+        @products = Product.find(product)
+      end
     end
   end
 
