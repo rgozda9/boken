@@ -1,0 +1,27 @@
+- @title = "Orders"
+
+table
+  thead
+    tr
+      th Pst rate
+      th Gst rate
+      th Hst rate
+      th Status
+      th Customer
+      th colspan="3"
+
+  tbody
+    - @orders.each do |order| 
+      tr
+        td = order.pst_rate
+        td = order.gst_rate
+        td = order.hst_rate
+        td = order.status
+        td = order.customer_id
+        td = link_to 'Show', order
+        td = link_to 'Edit', edit_order_path(order)
+        td = link_to 'Destroy', order, method: :delete, data: { confirm: 'Are you sure?' }
+
+br
+
+= link_to 'New Order', new_order_path
