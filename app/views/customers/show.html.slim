@@ -1,0 +1,45 @@
+p id="notice" = notice
+
+p
+  strong First name: 
+  = @customer.first_name
+
+p
+  strong Last name: 
+  = @customer.last_name
+
+p
+  strong Address: 
+  = @customer.address
+
+p
+  strong City: 
+  = @customer.city
+
+p
+  strong Country: 
+  = @customer.country_name
+
+p
+  strong Postal code:
+  = @customer.postal_code
+
+p
+  strong Email: 
+  = @customer.email
+
+p
+  strong Province: 
+  = @customer.province_id
+
+p
+  strong Username: 
+  = @customer.username
+
+p
+  strong Password: 
+  = @customer.password
+
+= link_to 'Edit', edit_customer_path(@customer)
+|  | 
+= link_to 'Back', customers_path
