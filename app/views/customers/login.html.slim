@@ -1,0 +1,20 @@
+- @title = "Login"
+p id="notice" = notice
+
+/- if session[:redirect] == true
+/  p You must login to proceed to checkout.
+
+= form_tag("", method: "post") do
+div class="field"
+  = label_tag "username", "Username:"
+  = text_field_tag :username, "", :autofocus => true
+div class="field"
+  = label_tag "password", "Password:"
+  = password_field_tag :password
+div class="actions"
+  = submit_tag "Login"
+  /- if session[:redirect].nil?
+  - add_to_session
+  /- else
+  /	- add_to_session
+  /	- redirect
