@@ -1,0 +1,25 @@
+p id="notice" = notice
+
+p
+  strong Pst rate:
+  = @order.pst_rate
+
+p
+  strong Gst rate:
+  = @order.gst_rate
+
+p
+  strong Hst rate:
+  = @order.hst_rate
+
+p
+  strong Status:
+  = @order.status
+
+p
+  strong Customer:
+  = @order.customer_id
+
+= link_to 'Edit', edit_order_path(@order)
+|  | 
+= link_to 'Back', orders_path
