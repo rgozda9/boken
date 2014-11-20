@@ -15,16 +15,19 @@ class LineItemsController < ApplicationController
   # GET /line_items/new
   def new
     @line_item = LineItem.new
+    @orders = Order.all
   end
 
   # GET /line_items/1/edit
   def edit
+    @orders = Order.all
   end
 
   # POST /line_items
   # POST /line_items.json
   def create
     @line_item = LineItem.new(line_item_params)
+    @orders = Order.all
 
     respond_to do |format|
       if @line_item.save

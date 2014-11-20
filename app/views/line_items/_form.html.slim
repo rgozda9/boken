@@ -1,0 +1,28 @@
+= form_for(@line_item) do |f| 
+  - if @line_item.errors.any?
+    div id="error_explanation"
+      h2 = pluralize(@line_item.errors.count, "error")
+      |  prohibited this line_item from being saved:
+
+      ul
+      - @line_item.errors.full_messages.each do |message| 
+        li = message
+
+  div class="field"
+    = f.label :quantity
+    br
+    = f.text_field :quantity
+  div class="field"
+    = f.label :price
+    br
+    = f.text_field :price
+  div class="field"
+    = f.label :product_id
+    br
+    = f.text_field :product_id
+  div class="field"
+    = f.label :order_id
+    br
+    = f.collection_select :order_id, @orders, :id, :name
+  div class="actions"
+    = f.submit
