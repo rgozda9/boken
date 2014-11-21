@@ -11,15 +11,13 @@ Rails.application.routes.draw do
 
   get 'products/:id/checkout', to: 'products#checkout', as: 'single_checkout'
 
-  get 'checkout', to: 'products#checkout', as: 'checkout'
+  get 'products/checkout', to: 'products#checkout', as: 'checkout'
 
   get 'sign_up', to: 'customers#new', as: 'sign_up'
 
   get 'login', to: 'customers#login', as: 'login'
 
-  get 'contact', to: 'admin/contact#edit', as: 'edit_contact'
-
-  post 'login', to: 'customers#login'
+  post "/login" => "customers#login", :as => :logged_in
 
   resources :line_items
 

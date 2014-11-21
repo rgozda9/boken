@@ -5,7 +5,7 @@ class CustomersController < ApplicationController
   # GET /customers.json
   def index
     @customers = Customer.all
-    session[:redirect] = false
+    #session[:redirect] = false
   end
 
   # GET /customers/1
@@ -19,13 +19,11 @@ class CustomersController < ApplicationController
     @provinces = Province.all
   end
 
-  def add_to_session
-    if !params[:username].nil? && !params[:password].nil?
-      customer = Customer.select('id').where("username = ?", params[:username]).where("password = ?", params[:password])
+  def add_to_session customer
+      #customer = Customer.select('id').where("username = ?", params[:username]).where("password = ?", params[:password])
       session[:customer_id] = customer
       flash[:notice] = "You have successfully logged in."
       redirect_to boken_path
-    end
   end
   helper_method :add_to_session
 
@@ -38,6 +36,23 @@ class CustomersController < ApplicationController
   #   flash[:notice] = "You have successfully signed up."
   #   redirect_to boken_path
   # end
+
+  def login
+    if !params[:username].nil? && !params[:password].nil?
+      @customer = Customer.find('id').where("username LIKE ?", params[:username]).where("password LIKE ?", params[:password])
+
+      respond_to do |format|
+        if @customer.save
+          #format.html { notice: 'You have successfully logged in.' }
+          #format.json { render :show, status: :created, location: @customer }
+          add_to_session(@customer)
+        else
+          format.html { render :new }
+          format.json { render json: @customer.errors, status: :unprocessable_entity }
+        end
+      end
+    end
+  end
 
   # GET /customers/1/edit
   def edit

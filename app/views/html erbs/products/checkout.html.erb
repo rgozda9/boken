@@ -5,7 +5,7 @@
   <%# redirect %>
 <%# else %>
   <%= form_tag("", method: "post") do %>
-    <%# if params[:id] != nil %>
+    <% if params[:id] != nil %>
     <div>
       <%= label_tag(:name, @product.name) %>
     </div>
@@ -20,6 +20,6 @@
     <div>
       <%= submit_tag "Submit" %>
     </div>
-    <%# end %>
+    <% end %>
   <% end %>
 <%# end %>

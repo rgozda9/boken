@@ -2,32 +2,86 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+$item-width: 16%;
+
+#filterrific_filter
+{
+	padding: 10px 5px;
+	background-color: #f0f0f0;
+    background-image: -webkit-gradient(linear,left top, left bottom,from(#fefefe), color-stop(0.5,#f0f0f0), color-stop(0.51, #e6e6e6));
+    background-image: -moz-linear-gradient(#fefefe 0%, #f0f0f0 50%, #e6e6e6 51%);
+    background-image: -o-linear-gradient(#fefefe 0%, #f0f0f0 50%, #e6e6e6 51%);
+    background-image: -ms-linear-gradient(#fefefe 0%, #f0f0f0 50%, #e6e6e6 51%);
+    background-image: linear-gradient(#fefefe 0%, #f0f0f0 50%, #e6e6e6 51%);
+}
+
 .filterrific_spinner img
 {
 	width: 11px;
 	height: 6px;
 }
 
-.description
+#filterrific_results
 {
-	width:10%;
-	float:left;
-}
+	margin:0px auto;
+	overflow: hidden;
+	padding: 5px 0;
+	position: inherit;
+	text-shadow: 0 1px 0 black;
+	width: 95%;
+	div.item
+	{
+		width: $item-width;
+		margin-left:3%;
+		margin-top:3%;
+		float:left;
+		a:link
+		{
+			color: #666;
+		}
 
-img
-{
-	height: auto; 
-	width: 20%;
-	float:left;
+		a:visited
+		{
+			color:#666;
+		}
+
+		p.description
+		{
+			/*width: $item-width;*/
+			float: left;
+			/*a:link
+			{
+				color: #cdcdcd;
+			}*/
+		}
+
+		p.price_rating
+		{
+			clear:both;
+		}
+
+		img
+		{
+			width:40%;
+			height: auto; 
+			/*width: $item-width;*/
+			float: left;
+		}
+	}
+
+	div.item:first-of-type
+	{
+		margin-left:0px;
+	}
 }
 
 #footer
 {
-	clear:both;
-	float:right;
+	clear: both;
+	float: right;
 }
 
 .cart img
 {
-	width:3%;
+	width: 3%;
 }

@@ -21,6 +21,7 @@ class ProductsController < ApplicationController
   end
 
   def redirect
+    session[:redirect] = true
     redirect_to login_path
   end
   helper_method :redirect
@@ -79,11 +80,16 @@ class ProductsController < ApplicationController
   end
 
   def checkout
-    if session[:product_id] != nil
-      session[:product_id].each do |product|
-        @products = Product.find(product)
-      end
+    if params[:id] != nil
+      @product = Product.find(params[:id])
+    else
+      @products = Product.all
     end
+    # if session[:product_id] != nil
+    #   session[:product_id].each do |product|
+    #     @products = Product.find(product)
+    #   end
+    # end
   end
 
   private

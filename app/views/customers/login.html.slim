@@ -1,8 +1,8 @@
 - @title = "Login"
 p id="notice" = notice
 
-/- if session[:redirect] == true
-/  p You must login to proceed to checkout.
+- if !session[:redirect].nil?
+  p id="flash" You must be logged in to proceed to checkout.
 
 = form_tag("", method: "post") do
 div class="field"
@@ -14,7 +14,7 @@ div class="field"
 div class="actions"
   = submit_tag "Login"
   /- if session[:redirect].nil?
-  - add_to_session
+  /- add_to_session
   /- else
   /	- add_to_session
   /	- redirect

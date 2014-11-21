@@ -1,18 +1,21 @@
 - @title = "Checkout"
 
-/ - if session[:customer_id].nil?
-/   - session[:redirect] = true
-/   - redirect
-/ - else
-  = form_tag("", method: "post") do
-  /    - if params[:id] != nil
+/- if session[:customer_id].nil? %>
+/  - session[:redirect] = true
+/  - redirect
+/- else
+- if session[:customer_id].nil?
+  - redirect
+-else
+  = form_tag("", method: "post") do 
+    - if params[:id] != nil 
       div
-        = label_tag(:name, @products.name)
+        = label_tag(:name, @product.name) 
       div
-        = label_tag(:quantity, "Quantity:")
-        = text_field_tag(:quantity, 1, minvalue: 1)
+        = label_tag(:quantity, "Quantity:") 
+        = text_field_tag(:quantity, 1, minvalue: 1) 
       div
-        = label_tag(:price, "Price:")
-        = text_field_tag(:price, @products.price, :disabled => true)
+        = label_tag(:price, "Price:") 
+        = text_field_tag(:price, @product.price, :disabled => true) 
       div
-        = submit_tag "Submit"
+        = submit_tag "Submit" 

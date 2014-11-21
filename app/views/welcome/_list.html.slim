@@ -2,41 +2,47 @@ div id="filterrific_results"
   div
     = page_entries_info products
   
-  table
-  	tr
-  	  th Name
-  	  th Image
-  	  th Description
-  	  th Price
-      th Rating
-      - if Product.status == true
-      th Sale
+  / table
+  / 	tr
+  / 	  th Name
+  / 	  th Image
+  / 	  th Description
+  / 	  th Price
+  /     th Rating
+  /     - if Product.status == true
+  /     th Sale
     
-    - @products.each do |product|
-      tr
-        td = link_to(product.name, product_path(product))
-        td class="image" 
-          = image_tag product.image
-        td
-          = truncate_text(product)
-        td
-          | $
-          = round(product.price)
-        td = product.rating
-        - if :with_on_sale == true
-          td 
-            | $
-            = round(product.sale_price)
+  /   - @products.each do |product|
+  /     tr
+  /       td = link_to(product.name, product_path(product))
+  /       td class="image" 
+  /         = image_tag product.image
+  /       td
+  /         = truncate_text(product)
+  /       td
+  /         | $
+  /         = round(product.price)
+  /       td = product.rating
+  /       - if :with_on_sale == true
+  /         td 
+  /           | $
+  /           = round(product.sale_price)
       
   /div data-score={"3"}
-= paginate @products
-
-/ div id="content"
-/ - @products.each do |product| 
-/   = image_tag product.image
-/   p class="description" = truncate_text(product)
-/     | $
-/     = round(product.price)
-/     |  - 
-/     = product.rating
-/     | /5
+  /div id="content"
+  
+  - @products.each do |product| 
+    div class="item"
+      p
+        = link_to(product.name, product_path(product))
+      |  
+      = image_tag product.image_url.to_s
+      |  
+      p class="description"
+        = truncate_text(product)
+      p class="price_rating"
+        |  $
+        = round(product.price)
+        |  - 
+        = product.rating
+        | /5

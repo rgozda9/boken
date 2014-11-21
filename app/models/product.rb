@@ -3,6 +3,7 @@ class Product < ActiveRecord::Base
   has_many :lineItems
   belongs_to :category
   has_many :ratings
+  mount_uploader :image, ImageUploader
 
   validates :name, :description, :price, :stock_quantity, :status, :image, :rating, :category_id, :presence => true
   validates :genre, :presence => true, allow_blank: true

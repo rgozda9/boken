@@ -15,7 +15,9 @@
   	| Sorted by 
   	= f.select(:sorted_by, Product.options_for_sorted_by)
   div
-  	= link_to('Reset filters', reset_filterrific_products_path,)
+  	= link_to('Reset filters', reset_filterrific_products_path)
     = render_filterrific_spinner
 
-  = render(partial: 'welcome/list', locals: { products: @products })
+= render(partial: 'welcome/list', locals: { products: @products })
+
+= paginate @products
