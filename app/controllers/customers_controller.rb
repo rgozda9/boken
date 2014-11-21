@@ -5,7 +5,6 @@ class CustomersController < ApplicationController
   # GET /customers.json
   def index
     @customers = Customer.all
-    #session[:redirect] = false
   end
 
   # GET /customers/1
@@ -20,37 +19,18 @@ class CustomersController < ApplicationController
   end
 
   def add_to_session customer
-      #customer = Customer.select('id').where("username = ?", params[:username]).where("password = ?", params[:password])
-      session[:customer_id] = customer
-      flash[:notice] = "You have successfully logged in."
-      redirect_to boken_path
+      session[:customer_id] = customer.id
+      if session[:redirect].nil? || session[:product_id].nil?
+        redirect_to boken_path
+      else
+        redirect_to checkout_path
+      end
   end
-  helper_method :add_to_session
-
-  def redirect
-    redirect_to checkout_path
-  end
-  helper_method :redirect
-  # def add_to_session
-  #   session[:customer_id] = @customer.id
-  #   flash[:notice] = "You have successfully signed up."
-  #   redirect_to boken_path
-  # end
 
   def login
     if !params[:username].nil? && !params[:password].nil?
-      @customer = Customer.find('id').where("username LIKE ?", params[:username]).where("password LIKE ?", params[:password])
-
-      respond_to do |format|
-        if @customer.save
-          #format.html { notice: 'You have successfully logged in.' }
-          #format.json { render :show, status: :created, location: @customer }
-          add_to_session(@customer)
-        else
-          format.html { render :new }
-          format.json { render json: @customer.errors, status: :unprocessable_entity }
-        end
-      end
+      @customer = Customer.select('id').where("username LIKE ?", params[:username]).where("password LIKE ?", params[:password]).first
+      add_to_session(@customer)
     end
   end
 
@@ -108,6 +88,6 @@ class CustomersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def customer_params
-      params.require(:customer).permit(:first_name, :last_name, :address, :city, :country_name, :postal_code, :email, :province_id, :username, :password)
+      params.require(:customer).permit(:first_name, :last_name, :address, :city, :country_name, :postal_code, :email, :province_id, :username, :password, :password_confirmation)
     end
 end

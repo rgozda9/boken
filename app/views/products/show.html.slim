@@ -44,9 +44,7 @@ p
 p
   strong Genre: 
   = @product.genre
-
-= link_to 'Buy', single_checkout_path
-|  |  
+ 
 = link_to "Add to cart", add_to_session_product_path(@product.id)
 br
 = link_to 'Back', boken_path

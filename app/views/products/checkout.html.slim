@@ -1,21 +1,43 @@
 - @title = "Checkout"
 
-/- if session[:customer_id].nil? %>
-/  - session[:redirect] = true
-/  - redirect
-/- else
-- if session[:customer_id].nil?
-  - redirect
+- if session[:product_id].nil?
+  p id="flash" You must have at least one item in your cart to proceed to checkout.
+  = link_to "Back", boken_path
 -else
   = form_tag("", method: "post") do 
-    - if params[:id] != nil 
+    = field_set_tag "Your information"
       div
-        = label_tag(:name, @product.name) 
+        = label_tag(:address, "Address:") 
+        = text_field_tag(:address, @customer.address)
+      br
       div
-        = label_tag(:quantity, "Quantity:") 
-        = text_field_tag(:quantity, 1, minvalue: 1) 
+        = label_tag(:city, "City:") 
+        = text_field_tag(:city, @customer.city)
+      br
       div
-        = label_tag(:price, "Price:") 
-        = text_field_tag(:price, @product.price, :disabled => true) 
+        = label_tag(:country_name, "Country:") 
+        = text_field_tag(:country_name, @customer.country_name)
+      br
       div
-        = submit_tag "Submit" 
+        = label_tag(:postal_code, "Postal Code:") 
+        = text_field_tag(:postal_code, @customer.postal_code)
+      br
+    = field_set_tag "Your items"
+      - @products.each do |product| 
+        div
+          = label_tag(:name, product.name) 
+          |  - 
+          = link_to "Remove Item"
+        br
+        div
+          = label_tag(:quantity, "Quantity:") 
+          = text_field_tag(:quantity, 1, minvalue: 1) 
+        br
+        div
+          | *Price will change with quantity
+          br
+          = label_tag(:price, "Price:") 
+          = text_field_tag(:price, product.price, :disabled => true) 
+        br
+      div
+    = submit_tag "Submit", data: { confirm: "Are you sure?" }

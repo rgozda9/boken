@@ -9,9 +9,7 @@ Rails.application.routes.draw do
 
   get 'reset_filterrific', to: 'welcome#reset_filterrific', as: 'reset_filterrific_products'
 
-  get 'products/:id/checkout', to: 'products#checkout', as: 'single_checkout'
-
-  get 'products/checkout', to: 'products#checkout', as: 'checkout'
+  get 'checkout', to: 'products#checkout', as: 'checkout'
 
   get 'sign_up', to: 'customers#new', as: 'sign_up'
 

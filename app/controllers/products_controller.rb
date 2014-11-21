@@ -15,16 +15,24 @@ class ProductsController < ApplicationController
 
   def add_to_session
     session[:product_id] ||= []
-    session[:product_id] << Product.find(params[:id]).id
-    flash[:notice] = "You have successfully added this item to your cart."
+    if !session[:product_id].nil? && session[:product_id].include?(Product.find(params[:id]).id)
+      flash[:notice] = "You have already added this item to your cart."
+    elsif !session[:product_id].include?(Product.find(params[:id]).id)
+      session[:product_id] << Product.find(params[:id]).id
+      flash[:notice] = "You have successfully added this item to your cart."
+    end
     redirect_to product_path(id: params[:id])
   end
 
-  def redirect
-    session[:redirect] = true
-    redirect_to login_path
+  def checkout
+    if session[:customer_id].nil?
+      session[:redirect] = true
+      redirect_to login_path
+    elsif !session[:product_id].nil?
+      @products = Product.find(session[:product_id])
+      @customer = Customer.find(session[:customer_id])
+    end
   end
-  helper_method :redirect
 
   # GET /products/new
   def new
@@ -77,19 +85,6 @@ class ProductsController < ApplicationController
       format.html { redirect_to products_url, notice: 'Product was successfully destroyed.' }
       format.json { head :no_content }
     end
-  end
-
-  def checkout
-    if params[:id] != nil
-      @product = Product.find(params[:id])
-    else
-      @products = Product.all
-    end
-    # if session[:product_id] != nil
-    #   session[:product_id].each do |product|
-    #     @products = Product.find(product)
-    #   end
-    # end
   end
 
   private

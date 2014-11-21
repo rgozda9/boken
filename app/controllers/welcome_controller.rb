@@ -46,6 +46,10 @@ class WelcomeController < ApplicationController
   end
   helper_method :shopping_cart_total
 
+  def logout
+    session[:customer_id] = nil
+  end
+
   # def add_to_session
   #   customer = Customer.find(params[:id]).where("username = ?", params[:username]).where("password = ?", params[:password])
   #   session[:customer_id] = customer

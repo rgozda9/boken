@@ -47,10 +47,10 @@
   div class="field"
     = f.label :password
     br
-    = f.password_field :password
+    = f.text_field :password
   div class="field"
-    = f.label :password_confirm
+    = f.label "Password confirm"
     br
-    = f.password_field :password_confirm
+    = f.text_field :password_confirmation
   div class="actions"
     = f.submit "Create"
