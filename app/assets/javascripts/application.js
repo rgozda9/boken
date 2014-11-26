@@ -15,4 +15,5 @@
 //= require turbolinks
 //= require_tree .
 //= require filterrific/filterrific-jquery
-// require jquery.raty.min
+//= require jquery.raty
+//= require jquery.raty.min

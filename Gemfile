@@ -1,5 +1,4 @@
-source 'https://rubygems.org'
-
+source 'http://rubygems.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.1.1'
@@ -45,5 +44,6 @@ gem 'kaminari'
 gem 'filterrific'
 gem 'slim-rails', '~> 2.1.0'
 gem 'carrierwave'
-#gem 'rmagick'
+gem 'rubocop'
+
 gem 'jquery-raty-rails', github: 'bmc/jquery-raty-rails'

@@ -14,6 +14,10 @@
         = label_tag(:city, "City:") 
         = text_field_tag(:city, @customer.city)
       br
+      / div
+      /   = label_tag(:province, "Province:")
+      /   = select_tag :province, options_from_collection_for_select(Province.all, "id", "name", @customer.province_id)
+      / br
       div
         = label_tag(:country_name, "Country:") 
         = text_field_tag(:country_name, @customer.country_name)
@@ -37,7 +41,7 @@
           | *Price will change with quantity
           br
           = label_tag(:price, "Price:") 
-          = text_field_tag(:price, product.price, :disabled => true) 
+          = text_field_tag(:price, round(product.price), :disabled => true) 
         br
       div
     = submit_tag "Submit", data: { confirm: "Are you sure?" }

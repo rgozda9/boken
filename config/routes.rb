@@ -17,6 +17,10 @@ Rails.application.routes.draw do
 
   post "/login" => "customers#login", :as => :logged_in
 
+  post "/checkout" => "products#invoice", :as => :invoice
+
+  get 'about', to: 'welcome#about', :as => 'about'
+
   resources :line_items
 
   resources :orders

@@ -41,8 +41,10 @@ div id="filterrific_results"
       p class="description"
         = truncate_text(product)
       p class="price_rating"
-        |  $
-        = round(product.price)
+        |  
+        = number_to_currency product.price
         |  - 
         = product.rating
         | /5
+        script $('#star').raty({ score: function(){ return 4; } });
+        p id="star"

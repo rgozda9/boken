@@ -27,6 +27,6 @@
   div class="field"
     = f.label :customer_id
     br
-    = f.collection_select :customer_id, @customers, :id, :full_name
+    = f.collection_select :customer_id, @customers, :id, full_name
   div class="actions"
     = f.submit

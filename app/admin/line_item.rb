@@ -1,6 +1,13 @@
 ActiveAdmin.register LineItem do
 
   permit_params :quantity, :price, :product_id, :order_id
+  index do
+    column :quantity
+    column :price
+    column :product
+    column :order_id
+    actions
+  end
   # See permitted parameters documentation:
   # https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
   #

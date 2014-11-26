@@ -1,0 +1,6 @@
+= semantic_form_for [:admin, @about] do |f| 
+  - if @about.persisted?
+    = f.inputs :body
+    = f.buttons :commit
+  - else 
+/    New Form

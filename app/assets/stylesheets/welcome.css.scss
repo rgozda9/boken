@@ -3,6 +3,28 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 $item-width: 16%;
+$header-color: #444;
+
+header#boken_header
+{
+	color:$header-color;
+	background-color:#6a7176;
+	text-shadow:0 1px 0 black;
+	h1
+	{
+		color:$header-color;
+	}
+
+	a
+	{
+		color:$header-color;
+	}
+
+	#flash_message
+	{
+		color:#00AA00;
+	}
+}
 
 #filterrific_filter
 {
@@ -13,6 +35,7 @@ $item-width: 16%;
     background-image: -o-linear-gradient(#fefefe 0%, #f0f0f0 50%, #e6e6e6 51%);
     background-image: -ms-linear-gradient(#fefefe 0%, #f0f0f0 50%, #e6e6e6 51%);
     background-image: linear-gradient(#fefefe 0%, #f0f0f0 50%, #e6e6e6 51%);
+    box-shadow:#000 3px 3px 3px;
 }
 
 .filterrific_spinner img
@@ -66,6 +89,11 @@ $item-width: 16%;
 			height: auto; 
 			/*width: $item-width;*/
 			float: left;
+		}
+
+		#star img
+		{
+			width:$item-width;
 		}
 	}
 

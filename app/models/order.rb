@@ -3,9 +3,13 @@ class Order < ActiveRecord::Base
   has_many :products
   has_many :lineItems
 
-  validates :status, :customer_id, :presence => true
-  validates :pst_rate, presence: true, if: "!Customer.province.pst.zero?"
-  validates :gst_rate, presence: true, if: "!Customer.province.gst.zero?"
-  validates :hst_rate, presence: true, if: "!Customer.province.hst.zero?"
-  validates :status, format: { with: /outstanding|paid|shipped/, message: "Must be 'outstanding', 'paid' or 'shipped'"}
+  validates :status, :customer_id, :address, :city, :country_name, :postal_code,
+            :pst_rate, :gst_rate, :hst_rate, presence: true
+  validates :status, format: { with: /outstanding|paid|shipped/,
+                               message: "Must be 'outstanding', 'paid' or
+                               'shipped'" }
+  validates :postal_code, format: { with: /[ABCEGHJKLMNPRSTVXY]{1}\d{1}
+                                          [ABCEGHJKLMNPRSTVWXYZ]{1}\s *\d{1}
+                                          [ABCEGHJKLMNPRSTVWXYZ]{1}\d{1}/,
+                                    message: 'Must be in this format: A1B 2C3' }
 end

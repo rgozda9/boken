@@ -1,9 +1,9 @@
 - @title = "Boken"
 
-div id="header"
+header id="boken_header"
   h1 Boken
   - if !session[:customer_id].nil? && session[:product_id].nil? && !session[:redirect].nil?
-    p id="flash" You must have at least one item in your shopping cart to proceed to checkout.
+    p id="flash_message" You must have at least one item in your shopping cart to proceed to checkout.
   - if !session[:customer_id].nil?
     p id="username"
       | Username: 
@@ -22,10 +22,14 @@ div id="header"
   = link_to "Sign Up", sign_up_path 
   |  / 
   = link_to "Admin", admin_root_path
+  / = link_to boken_path, action: session[:customer_id] = nil, data { confirm: "Do you want to logout?" }
+  / = render "shared/nav"
 
-  = debug session[:customer_id]
-  = debug session[:redirect]
-  = debug session[:product_id]
+  / = debug session[:customer_id]
+  / = debug session[:redirect]
+  / = debug session[:product_id]
+  / - customer = Customer.find(session[:customer_id])
+  / = customer.inspect
 
 div id="body"
 

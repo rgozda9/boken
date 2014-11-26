@@ -1,0 +1,46 @@
+- @title = "Invoice"
+
+p 
+  | Invoice for 
+  = @customer.first_name
+  |  
+  = @customer.last_name
+p
+  = params[:address]
+p
+  = params[:city]
+  | , 
+  = params[:province]
+  | , 
+  = params[:country_name]
+br
+p
+  - @line_items.each do |line_item| 
+    p
+      = line_item.product.name
+      |  
+      = display_periods(line_item)
+      |  
+      = line_item.quantity
+      |  x 
+      = number_to_currency line_item.price
+      |  
+      = number_to_currency total
+= debug session[:order_id]
+p
+  | Sub Total: 
+  = number_to_currency sub_total
+p
+  | PST ()
+  = pst
+/ p
+/   | GST () 
+/   = number_to_percentage(gst, precision:2)
+/ p
+/   | HST () 
+/   = number_to_percentage(hst, precision:2)
+/ p
+/   | Grand Total:
+/   = number_to_currency grand_total
+
+= link_to "Home", boken_path
