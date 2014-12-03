@@ -1,8 +1,9 @@
 ActiveAdmin.register Order do
 
-  permit_params :status, :customer_id, :pst_rate, :hst_rate, :gst_rate, :address, :city, :country_name, :postal_code, :province_name
+  permit_params :id, :status, :customer_id, :pst_rate, :hst_rate, :gst_rate, :address, :city, :country_name, :postal_code, :province
 
   index do
+    column :id
     column :status
     column :customer
     column :pst_rate
@@ -10,6 +11,7 @@ ActiveAdmin.register Order do
     column :gst_rate
     column :address
     column :city
+    column :province
     column :country_name
     column :postal_code
     actions

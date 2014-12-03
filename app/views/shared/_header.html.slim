@@ -1,0 +1,23 @@
+header id="boken_header"
+  span class="cart"
+    = image_tag "cart.png" 
+    |  Items in cart: 
+    = shopping_cart_items 
+    |  Total: 
+    = number_to_currency shopping_cart_total
+    |  - 
+    = link_to "Checkout", checkout_path
+  h1 Boken
+  - if !session[:customer_id].nil? && session[:product_id].nil? && !session[:redirect].nil?
+    span id="flash_message" You must have at least one item in your shopping cart to proceed to checkout.
+  - if !session[:customer_id].nil?
+    span id="username"
+      | Username: 
+      = link_to Customer.find(session[:customer_id]).username, edit_customer_path(Customer.find(session[:customer_id]).id)
+  span id="sign_in"
+    = link_to "Login", login_path
+    |  / 
+    = link_to "Sign Up", sign_up_path 
+    |  / 
+    = link_to "Admin", admin_root_path
+  = render "shared/nav"

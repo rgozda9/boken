@@ -10,7 +10,7 @@ p
 p
   = params[:city]
   | , 
-  = params[:province]
+  = @province.name
   | , 
   = params[:country_name]
 br
@@ -24,23 +24,32 @@ p
       = line_item.quantity
       |  x 
       = number_to_currency line_item.price
-      |  
-      = number_to_currency total
-= debug session[:order_id]
+      |  = 
+      = number_to_currency total(line_item.product_id)
+br
 p
   | Sub Total: 
   = number_to_currency sub_total
+- unless(pst.zero?)
+  p
+    | PST (
+    = number_to_percentage(pst, precision:2)
+    | ) : 
+    = number_to_currency pst_total
+- unless(gst.zero?)
+  p
+    | GST (
+    = number_to_percentage(gst, precision:2)
+    | ) : 
+    = number_to_currency gst_total
+- unless(hst.zero?)
+  p
+    | HST (
+    = number_to_percentage(hst, precision:2)
+    | ) : 
+    = number_to_currency hst_total
 p
-  | PST ()
-  = pst
-/ p
-/   | GST () 
-/   = number_to_percentage(gst, precision:2)
-/ p
-/   | HST () 
-/   = number_to_percentage(hst, precision:2)
-/ p
-/   | Grand Total:
-/   = number_to_currency grand_total
+  | Grand Total: 
+  = number_to_currency grand_total
 
 = link_to "Home", boken_path

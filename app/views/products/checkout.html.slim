@@ -14,10 +14,10 @@
         = label_tag(:city, "City:") 
         = text_field_tag(:city, @customer.city)
       br
-      / div
-      /   = label_tag(:province, "Province:")
-      /   = select_tag :province, options_from_collection_for_select(Province.all, "id", "name", @customer.province_id)
-      / br
+      div
+        = label_tag(:province, "Province:")
+        = select_tag :province, options_from_collection_for_select(Province.all, "id", "name", @customer.province_id)
+      br
       div
         = label_tag(:country_name, "Country:") 
         = text_field_tag(:country_name, @customer.country_name)
@@ -31,11 +31,11 @@
         div
           = label_tag(:name, product.name) 
           |  - 
-          = link_to "Remove Item"
+          = link_to "Remove Item", data: { confirm: "Are you sure?" }
         br
         div
           = label_tag(:quantity, "Quantity:") 
-          = text_field_tag(:quantity, 1, minvalue: 1) 
+          = text_field_tag("quantity_#{product.id}", 1, minvalue: 1) 
         br
         div
           | *Price will change with quantity

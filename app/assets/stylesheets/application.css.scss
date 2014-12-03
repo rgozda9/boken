@@ -1,0 +1,104 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or vendor/assets/stylesheets of plugins, if any, can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any styles
+ * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
+ * file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+ *require jquery-star-rating
+ */
+
+$header-color: #444;
+
+body
+{
+	background:#C2C2C2;
+}
+
+header#boken_header
+{
+	color:$header-color;
+	background-color:#6a7176;
+	text-shadow:0 1px 0 black;
+	height:116px;
+	h1
+	{
+		color:$header-color;
+		width: 10%;
+		padding-top:1%;
+		padding-left:1%;
+	}
+
+	a
+	{
+		color:$header-color;
+	}
+
+	#sign_in
+	{
+		float:right;
+		padding-right:1%;
+	}
+
+	#flash_message
+	{
+		color:#00AA00;
+	}
+
+	.cart
+	{
+		float:right;
+		width:22.5%;
+		padding-top:1%;
+	}
+
+	.cart img
+	{
+		width: 6%;
+	}
+
+	#username
+	{
+		float:right;
+		padding-right:1%;
+	}
+
+	nav
+	{
+		clear:both;
+		margin-left:30%;
+	}
+
+	nav ul li
+	{
+		font-size:1.2em;
+		display:inline;
+		list-style-type:none;
+		padding:0 2% 0.5% 2%;
+		border-radius:5px 5px 0px 0px;
+		border:#e6e6e6 solid 2px;
+		background-image: -webkit-gradient(linear,left top, left bottom,from(#fefefe), color-stop(0.5,#f0f0f0), color-stop(0.51, #e6e6e6));
+	    background-image: -moz-linear-gradient(#fefefe 0%, #f0f0f0 50%, #e6e6e6 51%);
+	    background-image: -o-linear-gradient(#fefefe 0%, #f0f0f0 50%, #e6e6e6 51%);
+	    background-image: -ms-linear-gradient(#fefefe 0%, #f0f0f0 50%, #e6e6e6 51%);
+	    background-image: linear-gradient(#fefefe 0%, #f0f0f0 50%, #e6e6e6 51%);
+	}
+
+	nav ul li a
+	{
+		text-decoration:none;
+	}
+}
+
+#footer
+{
+	clear: both;
+	float: right;
+}

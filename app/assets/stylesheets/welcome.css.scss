@@ -2,40 +2,18 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-$item-width: 16%;
-$header-color: #444;
-
-header#boken_header
-{
-	color:$header-color;
-	background-color:#6a7176;
-	text-shadow:0 1px 0 black;
-	h1
-	{
-		color:$header-color;
-	}
-
-	a
-	{
-		color:$header-color;
-	}
-
-	#flash_message
-	{
-		color:#00AA00;
-	}
-}
+$item-width: 15%;
 
 #filterrific_filter
 {
 	padding: 10px 5px;
-	background-color: #f0f0f0;
     background-image: -webkit-gradient(linear,left top, left bottom,from(#fefefe), color-stop(0.5,#f0f0f0), color-stop(0.51, #e6e6e6));
     background-image: -moz-linear-gradient(#fefefe 0%, #f0f0f0 50%, #e6e6e6 51%);
     background-image: -o-linear-gradient(#fefefe 0%, #f0f0f0 50%, #e6e6e6 51%);
     background-image: -ms-linear-gradient(#fefefe 0%, #f0f0f0 50%, #e6e6e6 51%);
     background-image: linear-gradient(#fefefe 0%, #f0f0f0 50%, #e6e6e6 51%);
-    box-shadow:#000 3px 3px 3px;
+    box-shadow:#555 3px 3px 3px;
+    margin-bottom:2%;
 }
 
 .filterrific_spinner img
@@ -46,6 +24,7 @@ header#boken_header
 
 #filterrific_results
 {
+	background:#C2C2C2;
 	margin:0px auto;
 	overflow: hidden;
 	padding: 5px 0;
@@ -54,9 +33,14 @@ header#boken_header
 	width: 95%;
 	div.item
 	{
+		border:inset #000 2px;
+		box-shadow: #555 5px 3px 3px;
+		padding:8px;
+		background-color:#FFF;
 		width: $item-width;
 		margin-left:3%;
 		margin-top:3%;
+		height:290px;
 		float:left;
 		a:link
 		{
@@ -70,12 +54,7 @@ header#boken_header
 
 		p.description
 		{
-			/*width: $item-width;*/
 			float: left;
-			/*a:link
-			{
-				color: #cdcdcd;
-			}*/
 		}
 
 		p.price_rating
@@ -87,7 +66,6 @@ header#boken_header
 		{
 			width:40%;
 			height: auto; 
-			/*width: $item-width;*/
 			float: left;
 		}
 
@@ -101,15 +79,4 @@ header#boken_header
 	{
 		margin-left:0px;
 	}
-}
-
-#footer
-{
-	clear: both;
-	float: right;
-}
-
-.cart img
-{
-	width: 3%;
 }

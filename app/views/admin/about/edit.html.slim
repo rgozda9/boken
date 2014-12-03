@@ -1,0 +1,7 @@
+= form_tag("", method: "post") do 
+  div
+    = label_tag(:content, "Content:") 
+    = text_field_tag(:content)
+  br
+  div class="actions"
+    = submit_tag

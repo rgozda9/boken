@@ -15,11 +15,14 @@ Rails.application.routes.draw do
 
   get 'login', to: 'customers#login', as: 'login'
 
-  post "/login" => "customers#login", :as => :logged_in
+  post "/login" => "customers#login", as: :logged_in
 
-  post "/checkout" => "products#invoice", :as => :invoice
+  post "/checkout" => "products#invoice", as: :invoice
 
-  get 'about', to: 'welcome#about', :as => 'about'
+  get 'about', to: 'pages#about', as: 'about'
+
+  get 'contact', to: 'pages#contact', as: 'contact'
+  resources :pages
 
   resources :line_items
 

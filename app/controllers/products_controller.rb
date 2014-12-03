@@ -40,6 +40,7 @@ class ProductsController < ApplicationController # rubocop:disable ClassLength
   # end
 
   def invoice # rubocop:disable all
+    @province = Province.find(params[:province])
     @customer = Customer.find(session[:customer_id])
     customer_order = @customer.orders.build
     customer_order.status = 'outstanding'
@@ -48,31 +49,34 @@ class ProductsController < ApplicationController # rubocop:disable ClassLength
     customer_order.hst_rate = @customer.province.hst
     customer_order.address = params[:address]
     customer_order.city = params[:city]
+    customer_order.province = params[:province]
     customer_order.country_name = params[:country_name]
     customer_order.postal_code = params[:postal_code]
     customer_order.save
+
     session[:order_id] = customer_order.id
     session[:product_id].each do |product_id|
       product = Product.find(product_id)
       customer_item = customer_order.lineItems.build
       customer_item.order_id = customer_order.id
       customer_item.price = product.price
-      customer_item.quantity = params[:quantity]
+      customer_item.quantity = params["quantity_#{product.id}"]
       customer_item.product_id = product.id
       customer_item.save
     end
-    @line_items = LineItem.where('order_id = ?', 2)
+    @line_items = LineItem.where('order_id = ?', session[:order_id])
+    session[:order_complete] = true
   end
 
   def display_periods(line_item)
-    '.' * (50 - line_item.product.name.size)
+    '.' * (100 - line_item.product.name.size)
   end
   helper_method :display_periods
 
-  def total
-    price = LineItem.select('price').where('order_id = ?', session[:order_id])
+  def total id
+    price = LineItem.select('price').where('order_id = ?', session[:order_id]).where('product_id = ?', id).first.price
     quantity = LineItem.select('quantity').where('order_id = ?',
-                                                 session[:order_id])
+                                                 session[:order_id]).where('product_id = ?', id).first.quantity
     total =  price * quantity
     total
   end
@@ -80,38 +84,52 @@ class ProductsController < ApplicationController # rubocop:disable ClassLength
 
   def sub_total
     total = 0
-    price = LineItem.select('price').where('order_id = ?', session[:order_id])
-    price.each do |item|
-      total += item
+    line_item = LineItem.where('order_id = ?', session[:order_id])
+    line_item.each do |item|
+      total += item.price * item.quantity
     end
     total
   end
   helper_method :sub_total
 
   def pst
-    session[:order_id] = 2
-    pst = Order.select('pst_rate').where('id = ?', 2)
-    pst.inspect
+    pst = Order.select('pst_rate').where('id = ?', session[:order_id]).first.pst_rate
+    pst
   end
   helper_method :pst
 
+  def pst_total
+    sub_total * pst
+  end
+  helper_method :pst_total
+
   def hst
-    hst = Order.select('hst_rate').where('id = ?', session[:order_id])
+    hst = Order.select('hst_rate').where('id = ?', session[:order_id]).first.hst_rate
     hst
   end
   helper_method :hst
 
+  def hst_total
+    sub_total * hst
+  end
+  helper_method :hst_total
+
   def gst
-    gst = Order.select('gst_rate').where('id = ?', session[:order_id])
+    gst = Order.select('gst_rate').where('id = ?', session[:order_id]).first.gst_rate
     gst
   end
   helper_method :gst
 
+  def gst_total
+    sub_total * gst
+  end
+  helper_method :gst_total
+
   def grand_total
     final = sub_total
-    final += pst unless pst.zero?
-    final += gst unless gst.zero?
-    final += hst unless hst.zero?
+    final += pst * sub_total unless pst.zero?
+    final += gst * sub_total unless gst.zero?
+    final += hst * sub_total unless hst.zero?
     final
   end
   helper_method :grand_total
@@ -194,6 +212,6 @@ class ProductsController < ApplicationController # rubocop:disable ClassLength
     params.require(:product).permit(:name, :description, :price,
                                     :stock_quantity, :on_sale, :sale_price,
                                     :status, :image, :rating, :category_id,
-                                    :genre)
+                                    :genre, :province)
   end
 end

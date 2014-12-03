@@ -1,0 +1,26 @@
+table
+  tr
+    th Order ID
+    th Customer
+    th Products
+    th Grand Total
+  - orders.each do |order| 
+    tr
+      td = order.id
+      - first_name = Customer.select('first_name').where('id = ?', order.customer_id).first.first_name
+      - last_name = Customer.select('last_name').where('id = ?', order.customer_id).first.last_name
+      td = "#{first_name} #{last_name}"
+      td
+      	- count = LineItem.where('order_id = ?', order.id).count
+      	- counter = 1
+        - sub_total = 0
+        - LineItem.where('order_id = ?', order.id).each do |line_item| 
+          = line_item.product_id
+          = ", " unless count == counter
+          - counter += 1
+          - sub_total += line_item.price * line_item.quantity
+      - pst = sub_total * Order.where('id = ?', order.id).first.pst_rate
+      - gst = sub_total * Order.where('id = ?', order.id).first.gst_rate
+      - hst = sub_total * Order.where('id = ?', order.id).first.hst_rate
+      - grand_total = sub_total + pst + gst + hst
+      td = number_to_currency grand_total
